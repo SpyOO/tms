@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D0F2C9E7-FD1D-4DC7-BFBE-57A77A1DF023}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="frontend\src\ContactList.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="backend\src\TMSRestServer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ContactList">
+        <MSBuild Projects="frontend\src\ContactList.dproj"/>
+    </Target>
+    <Target Name="ContactList:Clean">
+        <MSBuild Projects="frontend\src\ContactList.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ContactList:Make">
+        <MSBuild Projects="frontend\src\ContactList.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TMSRestServer">
+        <MSBuild Projects="backend\src\TMSRestServer.dproj"/>
+    </Target>
+    <Target Name="TMSRestServer:Clean">
+        <MSBuild Projects="backend\src\TMSRestServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TMSRestServer:Make">
+        <MSBuild Projects="backend\src\TMSRestServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ContactList;TMSRestServer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ContactList:Clean;TMSRestServer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ContactList:Make;TMSRestServer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
